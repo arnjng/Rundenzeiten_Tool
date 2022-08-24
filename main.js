@@ -1,3 +1,5 @@
+var zeitenArray;
+
 document.body.onload = fillTable;
 
 function generateTime(){
@@ -19,12 +21,26 @@ function generateTime(){
 
 }
 
+function fillArray(){
+
+    zeitenArray = [generateTime(), generateTime(), generateTime(), generateTime(), generateTime(), generateTime()];
+
+}
+
+function sortArray(){
+
+    
+
+}
+
 function fillTable(){
+
+    fillArray();
 
     for(var i=0; i<6; i++){
 
         const row = document.createElement("tr");
-        row.appendChild(document.createTextNode(generateTime()));
+        row.appendChild(document.createTextNode(zeitenArray[i]));
 
         document.getElementById("times").appendChild(row);
 
