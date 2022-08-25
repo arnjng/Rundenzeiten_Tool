@@ -1,7 +1,7 @@
 var zeitenArray;
 var completedLaps = 0;
 
-var 
+
 
 document.body.onload = simulateNewLap;
 
