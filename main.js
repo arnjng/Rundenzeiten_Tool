@@ -1,7 +1,7 @@
 var zeitenArray;
 var completedLaps = 0;
 
-
+//TODO: move whole creation of the table to js code
 
 document.body.onload = simulateNewLap;
 
