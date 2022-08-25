@@ -1,54 +1,46 @@
-
-//initial variable
+document.body.onload = buildPage();
 
 /*var zeitenArray;*/
 var completedLaps = 0;
 
-//provisionally initialize simulation of lap times, will later be moved to a button or sthm
-document.body.onload = simulateNewLap;
+function buildPage(){
 
-//simulates a race lap and prints the current/last lap time to the table in the HTML; shall later also move the lap times to an array and call a function to print the current best time
-function simulateNewLap(){
+    document.getElementById("remove").remove();
 
-    /*if(completedLaps > 0){
+    const table = document.createElement("table");
+    
+    const tableBody = document.createElement("tablebody", id = "tablebody");
 
+    const tableHeadPilot = document.createElement("th", id = "tableHeadPilot", className = "tableHead");
+    const tableHeadLastLap = document.createElement("th", id = "tableHeadLastLap" ,className = "tableHead");
+    const tableHeadBestLap = document.createElement("th", id = "tableHeadtableHeadBestLap", className = "tableHead");
 
+    const headerRow = document.createElement("tr", id = "headerRow", className = "tableHeadRow");
 
-    }*/
+    headerRow.appendChild(tableHeadPilot);
+    headerRow.appendChild(tableHeadLastLap);
+    headerRow.appendChild(tableHeadBestLap);
 
-    //raises lap counter
-    completedLaps++;
+    tableBody.appendChild(headerRow);
 
-    //provisionally builds the HTML table, will be organized
-    for(var i=0; i<6; i++){
+    for(var i = 0; i < 6; i++){
 
-        //TODO: move whole creation of the table to js code
+        const row = document.createElement("tr", id = "row"+i.toString(), className = "tableRow");
 
-        const row = document.createElement("tr");
-
-        const cellA = document.createElement("td");
-        cellA.textContent = (i+1).toString();
-        const pilotNo = i+1;
-        cellA.id = "pilot"+pilotNo.toString();
-        cellA.className = "pilotNumber";
-
-        const cellB = document.createElement("td");
-        cellB.appendChild(document.createTextNode(generateTime()));
-        cellB.id = "currentLap"+i;
-        cellB.className = "currentLap";
-
-        const cellC = document.createElement("td");
-        cellC.appendChild(document.createTextNode("N. A."));
-        cellC.id = "bestLap"+i;
-        cellC.className = "bestLap";
+        const cellA = document.createElement("td", id = "driver"+i.toString(), className = "pilotNo");
+        const cellB = document.createElement("td", id = "lastTime"+i.toString(), className = "lastTime");
+        const cellC = document.createElement("td", id = "bestTime"+i.toString(), className = "bestTime");
 
         row.appendChild(cellA);
         row.appendChild(cellB);
         row.appendChild(cellC);
 
-        document.getElementById("tableLapTimes").appendChild(row);
+        tableBody.appendChild(row);
 
     }
+    
+    table.appendChild(tableBody);
+    document.body.appendChild(table);
 
 }
 
@@ -141,6 +133,7 @@ function timeConvert(time){
     return TIME;
 }
 
+//legacy function for testing
 /*function averageTime(){
 
     var timeGlob = 0;
