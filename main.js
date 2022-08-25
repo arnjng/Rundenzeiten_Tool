@@ -1,7 +1,9 @@
-document.body.onload = buildPage();
-
 /*var zeitenArray;*/
 var completedLaps = 0;
+const pilotNo = 6;
+
+document.body.onload = buildPage();
+
 
 function buildPage(){
 
@@ -9,13 +11,25 @@ function buildPage(){
 
     const table = document.createElement("table");
     
-    const tableBody = document.createElement("tablebody", id = "tablebody");
+    const tableBody = document.createElement("tablebody");
+    tableBody.setAttribute("id", "tableBody");
+    tableBody.setAttribute("class", "tableBody");
 
-    const tableHeadPilot = document.createElement("th", id = "tableHeadPilot", className = "tableHead");
-    const tableHeadLastLap = document.createElement("th", id = "tableHeadLastLap" ,className = "tableHead");
-    const tableHeadBestLap = document.createElement("th", id = "tableHeadtableHeadBestLap", className = "tableHead");
+    const tableHeadPilot = document.createElement("th");
+    tableHeadPilot.setAttribute("id", "tableHeadPilot");
+    tableHeadPilot.setAttribute("class", "tableHead");
 
-    const headerRow = document.createElement("tr", id = "headerRow", className = "tableHeadRow");
+    const tableHeadLastLap = document.createElement("th");
+    tableHeadLastLap.setAttribute("id", "tableHeadLastLap");
+    tableHeadLastLap.setAttribute("class", "tableHead");
+    
+    const tableHeadBestLap = document.createElement("th");
+    tableHeadBestLap.setAttribute("id", "tableHeadBestLap");
+    tableHeadBestLap.setAttribute("class", "tableHead");
+
+    const headerRow = document.createElement("tr");
+    headerRow.setAttribute("id", "tableHeadRow");
+    headerRow.setAttribute("class", "headerRow");
 
     headerRow.appendChild(tableHeadPilot);
     headerRow.appendChild(tableHeadLastLap);
@@ -23,13 +37,23 @@ function buildPage(){
 
     tableBody.appendChild(headerRow);
 
-    for(var i = 0; i < 6; i++){
+    for(var i = 0; i < pilotNo; i++){
 
-        const row = document.createElement("tr", id = "row"+i.toString(), className = "tableRow");
+        const row = document.createElement("tr");
+        row.setAttribute("id", "row"+(i+1));
+        row.setAttribute("class", "tableRow");
 
-        const cellA = document.createElement("td", id = "driver"+i.toString(), className = "pilotNo");
-        const cellB = document.createElement("td", id = "lastTime"+i.toString(), className = "lastTime");
-        const cellC = document.createElement("td", id = "bestTime"+i.toString(), className = "bestTime");
+        const cellA = document.createElement("td");
+        cellA.setAttribute("id", "pilot"+(i+1));
+        cellA.setAttribute("class", "pilotNo");
+
+        const cellB = document.createElement("td");
+        cellB.setAttribute("id", "lastTime"+(i+1));
+        cellB.setAttribute("class", "lastTime");
+
+        const cellC = document.createElement("td");
+        cellC.setAttribute("id", "bestTime"+(i+1));
+        cellC.setAttribute("class", "bestTime");
 
         row.appendChild(cellA);
         row.appendChild(cellB);
@@ -42,14 +66,23 @@ function buildPage(){
     table.appendChild(tableBody);
     document.body.appendChild(table);
 
+    fillTable();
+
 }
 
 //TODO: implement function that prints the best lap time
 
-function fillArray(){
+function fillTable(){
 
-    zeitenArray = [generateTime(), generateTime(), generateTime(), generateTime(), generateTime(), generateTime()];
+    document.getElementById("tableHeadPilot").appendChild(document.createTextNode("Fahrer"));
+    document.getElementById("tableHeadLastLap").appendChild(document.createTextNode("Letzte Runde"));
+    document.getElementById("tableHeadBestLap").appendChild(document.createTextNode("Beste Runde"));
 
+    for(let i=0; i < pilotNo; i++){
+
+        document.getElementById("pilot"+(i+1)).appendChild(document.createTextNode("Fahrer " + (i+1)));
+    
+    }
 }
 
 //quick sort fuction for arrays, shall later on be used to sort lap times per race pilot and find the best lap time
