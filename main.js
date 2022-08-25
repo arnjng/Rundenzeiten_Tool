@@ -1,6 +1,7 @@
 /*var zeitenArray;*/
 var completedLaps = 0;
 const pilotNo = 6;
+const lapNo = 10;
 
 document.body.onload = buildPage();
 
@@ -68,9 +69,27 @@ function buildPage(){
 
     fillTable();
 
+    const start = document.createElement("button");
+    start.appendChild(document.createTextNode("Start"));
+    start.setAttribute("id", "startButton");
+    start.setAttribute("class", "button");
+    start.setAttribute("onclick", "race()");
+
+    document.body.appendChild(start);
+
 }
 
 //TODO: implement function that prints the best lap time
+
+function race(){
+
+    for(var i=0; i<pilotNo; i++){
+
+        document.getElementById("lastTime" + (i+1)).appendChild(document.createTextNode(generateTime()));
+
+    }
+
+}
 
 function fillTable(){
 
