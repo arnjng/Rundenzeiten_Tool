@@ -1,23 +1,28 @@
-var zeitenArray;
+
+//initial variable
+
+/*var zeitenArray;*/
 var completedLaps = 0;
 
-//TODO: move whole creation of the table to js code
-
+//provisionally initialize simulation of lap times, will later be moved to a button or sthm
 document.body.onload = simulateNewLap;
 
+//simulates a race lap and prints the current/last lap time to the table in the HTML; shall later also move the lap times to an array and call a function to print the current best time
 function simulateNewLap(){
 
-    if(completedLaps > 0){
+    /*if(completedLaps > 0){
 
 
 
-    }
+    }*/
 
+    //raises lap counter
     completedLaps++;
 
-    fillArray();
-
+    //provisionally builds the HTML table, will be organized
     for(var i=0; i<6; i++){
+
+        //TODO: move whole creation of the table to js code
 
         const row = document.createElement("tr");
 
@@ -28,7 +33,7 @@ function simulateNewLap(){
         cellA.className = "pilotNumber";
 
         const cellB = document.createElement("td");
-        cellB.appendChild(document.createTextNode(zeitenArray[i]));
+        cellB.appendChild(document.createTextNode(generateTime()));
         cellB.id = "currentLap"+i;
         cellB.className = "currentLap";
 
@@ -47,12 +52,15 @@ function simulateNewLap(){
 
 }
 
+//TODO: implement function that prints the best lap time
+
 function fillArray(){
 
     zeitenArray = [generateTime(), generateTime(), generateTime(), generateTime(), generateTime(), generateTime()];
 
 }
 
+//quick sort fuction for arrays, shall later on be used to sort lap times per race pilot and find the best lap time
 function quickSort(originalArr) {
     if (originalArr.length <= 1) {
        return originalArr;
@@ -73,6 +81,28 @@ function quickSort(originalArr) {
     }
  }
 
+//randomly generates a lap time in seconds (between 84.825 and 89.175 seconds)
+function generateTime(){
+
+    var time;
+    var timeMulti=0;
+
+    while(timeMulti > 1.025 || timeMulti < 0.975){
+
+        timeMulti = Math.random() * 2;
+
+    }
+    
+    time = timeMulti * 87;
+
+    var time2 = timeConvert(time);
+    time2 = time2.toString();
+
+    return time2;
+
+}
+
+//converts the output from generateTime() to a string representation in minutes, seconds, milliseconds
 function timeConvert(time){
 
     var timeMin = time/60;
@@ -109,26 +139,6 @@ function timeConvert(time){
 
     var TIME = TIME + ":" + timeMiliSec2;
     return TIME;
-}
-
-function generateTime(){
-
-    var time;
-    var timeMulti=0;
-
-    while(timeMulti > 1.025 || timeMulti < 0.975){
-
-        timeMulti = Math.random() * 2;
-
-    }
-    
-    time = timeMulti * 87;
-
-    var time2 = timeConvert(time);
-    time2 = time2.toString();
-
-    return time2;
-
 }
 
 /*function averageTime(){
