@@ -114,8 +114,9 @@ function bestTimes(){
 
         for(var i=0; i < pilotNo; i++){
 
-            if(document.getElementById("lastTime" + (i+1).innerHTML) > document.getElementById("bestTime" + (i+1).innerHTML)){
+            if(document.getElementById("lastTime" + (i+1)).innerHTML.toString() < document.getElementById("bestTime" + (i+1)).innerHTML.toString()){
 
+                document.getElementById("bestTime" + (i+1)).innerHTML = "";
                 document.getElementById("bestTime" + (i+1)).appendChild(document.createTextNode(document.getElementById("lastTime" + (i+1)).innerHTML));
 
             }
