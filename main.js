@@ -1,12 +1,15 @@
 /*var zeitenArray;*/
 var completedLaps = 0;
-const pilotNo = 6;
-const lapNo = 10;
+var pilotNo;
+var lapNo;
 
 document.body.onload = buildPage();
 
 
 function buildPage(){
+
+    pilotNo = window.prompt("Wie viele Fahrer fahren mit?", 0);
+    lapNo = window.prompt("Wie viele Runden werden gefahren?", 0);
 
     document.getElementById("remove").remove();
 
@@ -83,9 +86,41 @@ function buildPage(){
 
 function race(){
 
-    for(var i=0; i<pilotNo; i++){
+    for(var i=0; i < pilotNo; i++){
 
+        document.getElementById("lastTime" + (i+1)).innerHTML = "";
         document.getElementById("lastTime" + (i+1)).appendChild(document.createTextNode(generateTime()));
+
+    }
+
+    bestTimes();
+
+    completedLaps++;
+
+}
+
+function bestTimes(){
+
+    if (completedLaps < 1){
+
+        for(var i=0; i < pilotNo; i++){
+
+            document.getElementById("bestTime" + (i+1)).appendChild(document.createTextNode(document.getElementById("lastTime" + (i+1)).innerHTML));
+            
+        }
+
+    }
+    else{
+
+        for(var i=0; i < pilotNo; i++){
+
+            if(document.getElementById("lastTime" + (i+1).innerHTML) > document.getElementById("bestTime" + (i+1).innerHTML)){
+
+                document.getElementById("bestTime" + (i+1)).appendChild(document.createTextNode(document.getElementById("lastTime" + (i+1)).innerHTML));
+
+            }
+
+        }
 
     }
 
@@ -185,7 +220,7 @@ function timeConvert(time){
     return TIME;
 }
 
-//legacy function for testing
+//legacy function from testing
 /*function averageTime(){
 
     var timeGlob = 0;
